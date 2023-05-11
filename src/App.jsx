@@ -5,6 +5,7 @@ import { Row, Divider, Button } from "antd";
 import { useState } from "react";
 import FoodBox from "./components/FoodBox";
 import AddFoodForm from "./components/AddFoodForm";
+import Search from "./components/Search";
 
 function App() {
   const [foodState, setFoodState] = useState(foods);
@@ -13,13 +14,20 @@ function App() {
     setFoodState([...foodState, newFood]);
   };
 
+  const onSearch = (search) => {
+    const term = new RegExp(search, "i");
+    const newfoods = foods.filter((food) => term.test(food.name));
+    setFoodState(newfoods);
+  };
+
   return (
     <div className="App">
       <AddFoodForm onFinish={onFoodCreate} />
 
       <Button> Hide Form / Add New Food </Button>
+      <Divider>Search</Divider>
 
-      {/* Display Search component here */}
+      <Search onUpdate={onSearch} />
 
       <Divider>Food List</Divider>
 
