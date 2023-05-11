@@ -4,13 +4,18 @@ import "./App.css";
 import { Row, Divider, Button } from "antd";
 import { useState } from "react";
 import FoodBox from "./components/FoodBox";
+import AddFoodForm from "./components/AddFoodForm";
 
 function App() {
   const [foodState, setFoodState] = useState(foods);
 
+  const onFoodCreate = (newFood) => {
+    setFoodState([...foodState, newFood]);
+  };
+
   return (
     <div className="App">
-      {/* Display Add Food component here */}
+      <AddFoodForm onFinish={onFoodCreate} />
 
       <Button> Hide Form / Add New Food </Button>
 
