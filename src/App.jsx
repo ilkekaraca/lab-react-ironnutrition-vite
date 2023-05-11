@@ -16,7 +16,12 @@ function App() {
 
   const onSearch = (search) => {
     const term = new RegExp(search, "i");
-    const newfoods = foods.filter((food) => term.test(food.name));
+    const newfoods = foodState.filter((food) => term.test(food.name));
+    setFoodState(newfoods);
+  };
+
+  const onDelete = (name) => {
+    const newfoods = foodState.filter((food) => food.name !== name);
     setFoodState(newfoods);
   };
 
@@ -33,7 +38,7 @@ function App() {
 
       <Row style={{ width: "100%", justifyContent: "center" }}>
         {foodState.map((food) => {
-          return <FoodBox food={food} />;
+          return <FoodBox food={food} deleteFun={onDelete} />;
         })}
       </Row>
     </div>
